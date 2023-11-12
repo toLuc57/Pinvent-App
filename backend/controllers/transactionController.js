@@ -59,18 +59,39 @@ const getCancelledTransactions = asyncHandler(async (req, res) => {
 
 // Get single transaction
 const getTransaction = asyncHandler(async (req, res) => {
-  const transaction = await Transaction.findById(req.params.id);
-  // if Transaction doesnt exist
-  if (!transaction) {
-    res.status(404);
-    throw new Error("Transaction not found");
+  try {
+    const transaction = await Transaction.findById(req.params.id);
+  
+    // Kiểm tra xem transaction có tồn tại không
+    if (!transaction) {
+      res.status(404);
+      throw new Error("Transaction not found");
+    }
+  
+    // Kiểm tra xem transaction có thuộc về user hiện tại không
+    if (transaction.user.toString() !== req.user.id) {
+      res.status(401);
+      throw new Error("User not authorized");
+    }
+  
+    // Sử dụng Promise.all để chờ tất cả các promises hoàn thành
+    const transformedDetail = await Promise.all(transaction.detail.map(async (item) => {
+      const product = await Product.findOne({ product_id: item.product_id });
+      return {
+        product,
+        quantity: item.quantity,
+        price: item.price,
+      };
+    }));
+
+    const result = { ...transaction._doc };
+    result.detail = transformedDetail;
+
+    res.status(200).json(result);
+  } catch (error) {
+    res.status(500);
+    throw new Error(error.message);
   }
-  // Match transaction to its user
-  if (transaction.user.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
-  res.status(200).json(transaction);
 });
 
   // Update transaction status
@@ -107,6 +128,7 @@ const updateTransactionStatus = asyncHandler(async (req, res) => {
   }
 });
 
+// Get Highly Useful Itemsets
 const getHighlyUsefulItemsets = asyncHandler(async (req, res) => {
   const { minUtility } = req.body;
 
@@ -119,8 +141,6 @@ const getHighlyUsefulItemsets = asyncHandler(async (req, res) => {
   const algo = new AlgoUPGrowth();
 
   const HUIs = algo.runAlgorithmDB(successfulTransactions, minUtility);
-
-  const results = [];
 
   try {
     const arrayResult = await convertPromiseToArray(HUIs);

@@ -54,7 +54,7 @@ const createProduct = asyncHandler(async (req, res) => {
 
 // Get all Products
 const getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find({ user: req.user.id }).sort("-createdAt");
+  const products = await Product.find({ user: req.user.id, deletedAt: null }).sort("-createdAt");
   res.status(200).json(products);
 });
 
@@ -76,19 +76,19 @@ const getProduct = asyncHandler(async (req, res) => {
 
 // Delete Product
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
-  // if product doesnt exist
-  if (!product) {
-    res.status(404);
-    throw new Error("Product not found");
+  const deletedProduct = await Product.findByIdAndUpdate(
+    req.params.id,
+    { deletedAt: new Date() },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
+  if (deletedProduct) {
+    res.status(200).json(deletedProduct);
+  } else {
+    res.status(404).json({ message: 'Product not found' });
   }
-  // Match product to its user
-  if (product.user.toString() !== req.user.id) {
-    res.status(401);
-    throw new Error("User not authorized");
-  }
-  await product.remove();
-  res.status(200).json({ message: "Product deleted." });
 });
 
 // Update Product

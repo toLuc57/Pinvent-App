@@ -7,6 +7,10 @@ const userRoute = require("./routes/userRoute");
 const productRoute = require("./routes/productRoute");
 const contactRoute = require("./routes/contactRoute");
 const transactionRoute = require("./routes/transactionRoute");
+const staffRoute = require("./routes/staffRoute");
+const supplierRoute = require("./routes/supplierRoute");
+const storeRoute = require("./routes/storeRoute");
+const highlyUtilityiIemsetsRoute = require("./routes/highlyUtilityiIemsetsRoute");
 const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser");
 const path = require("path");
@@ -41,6 +45,9 @@ app.post("/api/upload/products", uploadProduct.single("file"), function (req, re
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/transactions", transactionRoute);
+app.use("/api/staff", staffRoute);
+app.use("/api/stores", storeRoute);
+app.use("/api/supplier", supplierRoute);
 app.use("/api/contactus", contactRoute);
 
 // Routes

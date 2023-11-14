@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ProductCounter = require("./productCounterModel");
 
 const productSchema = mongoose.Schema(
   {
@@ -49,6 +48,18 @@ const productSchema = mongoose.Schema(
     timestamps: true,
   }
 );
+const productCounterSchema = new mongoose.Schema({
+  user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      unique: true,
+      required: true,
+      ref: "User",
+  },
+  sequence_value: {
+      type: Number,
+      default: 1
+  }
+});
 
 productSchema.pre('save', async function(next) {
   if (!this.product_id) {
@@ -63,4 +74,5 @@ productSchema.pre('save', async function(next) {
 });
 
 const Product = mongoose.model("Product", productSchema);
+const ProductCounter = mongoose.model('ProductCounter', productCounterSchema);
 module.exports = Product;

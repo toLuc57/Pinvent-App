@@ -73,10 +73,6 @@ const updateProduct = async (id, formData) => {
     image : fileName === "" ? image : fileName,
   }
 
-  console.log(image);
-  console.log("--");
-  console.log(fileName);
-
   const response = await axios.patch(`${API_URL}${id}`, data);
   return response.data;
 };

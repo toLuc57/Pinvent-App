@@ -14,6 +14,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useDispatch } from "react-redux";
 import { getLoginStatus } from "./services/authService";
 import { SET_LOGIN } from "./redux/features/auth/authSlice";
+import AddTransaction from "./pages/transaction/AddTransaction";
+import Transaction from "./pages/transaction/Transaction";
 import AddProduct from "./pages/addProduct/AddProduct";
 import ProductDetail from "./components/product/productDetail/ProductDetail";
 import EditProduct from "./pages/editProduct/EditProduct";
@@ -80,6 +82,26 @@ function App() {
             <Sidebar>
               <Layout>
                 <EditProduct />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/add-transaction/"
+          element={
+            <Sidebar>
+              <Layout>
+                <AddTransaction />
+              </Layout>
+            </Sidebar>
+          }
+        />
+        <Route
+          path="/transactions/"
+          element={
+            <Sidebar>
+              <Layout>
+                <Transaction />
               </Layout>
             </Sidebar>
           }

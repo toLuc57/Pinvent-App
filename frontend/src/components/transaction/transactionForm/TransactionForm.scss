@@ -1,0 +1,34 @@
+.transaction-form {
+  display: flex;
+  gap: 20px;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+  }
+
+  .card {
+    flex: 1;
+    @media (max-width: 800px) {
+      width: 100%;
+    }
+
+    form {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--color-dark);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 20px;
+
+      label {
+        margin-bottom: 5px;
+      }
+    }
+    .total-price {      
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--color-dark);
+    }
+  }
+}

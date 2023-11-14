@@ -4,7 +4,7 @@ const initialState = {
   filteredProducts: [],
 };
 
-const filterSlice = createSlice({
+const filterProductSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
@@ -21,8 +21,8 @@ const filterSlice = createSlice({
   },
 });
 
-export const { FILTER_PRODUCTS } = filterSlice.actions;
+export const { FILTER_PRODUCTS } = filterProductSlice.actions;
 
-export const selectFilteredPoducts = (state) => state.filter.filteredProducts;
+export const selectFilteredPoducts = (state) => state.filterProduct.filteredProducts;
 
-export default filterSlice.reducer;
+export default filterProductSlice.reducer;

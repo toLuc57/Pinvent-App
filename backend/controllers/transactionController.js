@@ -37,26 +37,6 @@ const getAllTransactions = asyncHandler(async (req, res) => {
   }
 });
   
-// Get all successful transactions (status 3)
-const getSuccessfulTransactions = asyncHandler(async (req, res) => {
-  try {    
-    const successfulTransactions = await Transaction.find({ user: req.user.id, status: 3 }).sort("-createdAt");
-    res.status(200).json(successfulTransactions);
-  } catch (error) {
-    res.status(404).json('Cannot get all successful transactions');
-  }
-});
-
-// Get all canceled transactions (status 4)
-const getCancelledTransactions = asyncHandler(async (req, res) => {
-  try {
-    const cancelledTransactions = await Transaction.find({ user: req.user.id, status: 4 }).sort("-createdAt");
-    return cancelledTransactions;
-  } catch (error) {
-    res.status(404).json('Cannot get all canceled transactions');
-  }
-});
-
 // Get single transaction
 const getTransaction = asyncHandler(async (req, res) => {
   try {
@@ -177,8 +157,6 @@ async function convertPromiseToArray(promise) {
 module.exports = {
   createTransaction,
   getAllTransactions,
-  getSuccessfulTransactions,
-  getCancelledTransactions,
   getTransaction,
   updateTransactionStatus,
   getHighlyUsefulItemsets,

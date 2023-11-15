@@ -15,7 +15,12 @@ const errorHandler = require("./middleWare/errorMiddleware");
 const cookieParser = require("cookie-parser");
 const path = require("path");
 const {uploadUser, uploadProduct} = require("./utils/fileUpload");
+const { swaggerUi, swaggerSpec } = require('./swagger'); 
+
 const app = express();
+
+// Set configuration for Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Middlewares
 app.use(express.json());
@@ -48,6 +53,7 @@ app.use("/api/transactions", transactionRoute);
 app.use("/api/staff", staffRoute);
 app.use("/api/stores", storeRoute);
 app.use("/api/supplier", supplierRoute);
+app.use("/api/huis", highlyUtilityiIemsetsRoute);
 app.use("/api/contactus", contactRoute);
 
 // Routes
@@ -64,6 +70,7 @@ mongoose
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server Running on port ${PORT}`);
+      console.log(`http://localhost:${PORT}/api-docs`);
     });
   })
   .catch((err) => console.log(err));

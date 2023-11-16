@@ -9,6 +9,21 @@ const menu = [
     path: "/dashboard",
   },
   {
+    title: "Product",
+    icon: <TbReceipt />,
+    childrens: [
+      {
+        title: "View",
+        path: "/products",
+      },
+      {
+        title: "Add Product",
+        icon: <BiImageAdd />,
+        path: "/add-product",
+      },
+    ],
+  },
+  {
     title: "Transaction",
     icon: <TbReceipt />,
     childrens: [
@@ -23,9 +38,46 @@ const menu = [
     ],
   },
   {
-    title: "Add Product",
-    icon: <BiImageAdd />,
-    path: "/add-product",
+    title: "Store",
+    icon: <TbReceipt />,
+    childrens: [
+      {
+        title: "View",
+        path: "/stores",
+      },
+      {
+        title: "Add Store",
+        path: "/add-store",
+      },
+    ],
+  },
+  {
+    title: "Staff",
+    icon: <TbReceipt />,
+    childrens: [
+      {
+        title: "View",
+        path: "/staffs",
+      },
+      {
+        title: "Add Staff",
+        path: "/add-staff",
+      },
+    ],
+  },
+  {
+    title: "Supplier",
+    icon: <TbReceipt />,
+    childrens: [
+      {
+        title: "View",
+        path: "/suppliers",
+      },
+      {
+        title: "Add Suppliers",
+        path: "/add-supplier",
+      },
+    ],
   },
   {
     title: "Account",

@@ -16,7 +16,7 @@ const SelectedProducts = ({
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(products);
+    // console.log(products);
     setCurrentItems(products.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(products.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, products]);

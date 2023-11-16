@@ -1,13 +1,13 @@
 import React from 'react';
-import './Store.scss';
+import './SelectedStore.scss';
 
 const Store = ({ stores, selectedStore, handleStoreChange }) => {
   return (
     <div className='store'>
       <label>Store:</label>
-      <select value={selectedStore} onChange={handleStoreChange}>
+      <select value={selectedStore} name='store' onChange={handleStoreChange}>
         {stores.map((store, index) => (
-          <option key={index} value={store.id}>
+          <option key={index} value={store._id}>
             {store.name}
           </option>
         ))}

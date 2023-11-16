@@ -1,13 +1,13 @@
 import React from 'react';
-import "./Supplier.scss";
+import "./SelectedSupplier.scss";
 
 const Supplier = ({ suppliers, selectedSupplier, handleSupplierChange }) => {
   return (
     <div className='supplier'>
       <label>Supplier:</label>
-      <select value={selectedSupplier} onChange={handleSupplierChange}>
+      <select value={selectedSupplier} name='supplier' onChange={handleSupplierChange}>
         {suppliers.map((supplier, index) => (
-          <option key={index} value={supplier.id}>
+          <option key={index} value={supplier._id}>
             {supplier.name}
           </option>
         ))}

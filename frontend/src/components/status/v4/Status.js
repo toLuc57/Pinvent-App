@@ -35,7 +35,7 @@ const Status = ({ statusCode }) => {
   const statusColor = getStatusColor(statusCode);
 
   return (
-    <span style={{ color: statusColor }}>
+    <span id='status' style={{ color: statusColor }}>
       {statusText}
     </span>
   );

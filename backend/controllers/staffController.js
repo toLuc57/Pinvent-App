@@ -19,7 +19,6 @@ const createStaff = asyncHandler(async (req, res) => {
       phone,
       status,
     });
-    console.log(staff)
   
     res.status(201).json(staff);
   });

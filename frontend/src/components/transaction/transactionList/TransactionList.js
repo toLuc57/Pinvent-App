@@ -13,8 +13,8 @@ import ReactPaginate from "react-paginate";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { Link } from "react-router-dom";
-import StatusDropdown from "../../status/StatusDropdown";
-import Status from "../../status/Status";
+import StatusDropdown from "../../status/v4/StatusDropdown";
+import Status from "../../status/v4/Status";
 import { 
   updateTransaction,
   getTransactions

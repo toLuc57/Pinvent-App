@@ -12,7 +12,6 @@ const supplierSchema = new mongoose.Schema(
       required: [true, "Please add a name"],
       trim: true,
     },
-    supplier_id: Number,
     phone: {
       type: String,
       default: "+234",

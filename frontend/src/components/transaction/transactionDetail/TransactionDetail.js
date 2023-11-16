@@ -6,7 +6,7 @@ import { selectIsLoggedIn } from "../../../redux/features/auth/authSlice";
 import { getTransaction } from "../../../redux/features/transaction/transactionSlice";
 import Card from "../../card/Card";
 import { SpinnerImg } from "../../loader/Loader";
-import Status from "../../status/Status";
+import Status from "../../status/v4/Status";
 import "./TransactionDetail.scss";
 
 const TransactionDetail = () => {

@@ -9,8 +9,8 @@ const createTransaction = async (formData) => {
   const status = formData.get("status");
   const total = formData.get("total");
   const supplier = formData.get("supplier");
-  const store_id = formData.get("store_id");
-  const staff_id = formData.get("staff_id");
+  const store_id = formData.get("store");
+  const staff_id = formData.get("staff");
   const detail = formData.get("detail");
 
   const data = {
@@ -50,23 +50,23 @@ const updateTransaction = async (id, formData) => {
 };
 
 // Get Highly Useful Itemsets
-const getHighlyUsefulItemsets = async (formData) => {
-    const minUtility = formData.get("minUtility");
+// const getHighlyUsefulItemsets = async (formData) => {
+//     const minUtility = formData.get("minUtility");
   
-    const data = {
-        minUtility,
-    }
+//     const data = {
+//         minUtility,
+//     }
   
-    const response = await axios.patch(`${API_URL}/huis`, data);
-    return response.data;
-  };
+//     const response = await axios.patch(`${API_URL}/huis`, data);
+//     return response.data;
+//   };
 
 const transactionService = {
   createTransaction,
   getTransactions,
   getTransaction,
   updateTransaction,
-  getHighlyUsefulItemsets,
+  // getHighlyUsefulItemsets,
 };
 
 export default transactionService;

@@ -12,7 +12,6 @@ const storeSchema = new mongoose.Schema(
       required: [true, "Please add a name"],
       trim: true,
     },
-    store_id: Number,
     phone: {
       type: String,
       default: "+234",

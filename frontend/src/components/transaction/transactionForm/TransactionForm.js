@@ -1,67 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import Card from '../../card/Card'
-import Supplier from '../../supplier/Supplier';
-import Store from '../../store/Store';
-import Staff from '../../staff/Staff';
+import Supplier from '../../supplier/selectedSupplier/SelectedSupplier';
+import Store from '../../store/selectedStore/SelectedStore';
+import Staff from '../../staff/selectedStaff/SelectedStaff';
 import SelectedProducts from '../../product/selectedProducts/SelectedProducts';
 import AddProduct from "../../product/addProduct/AddProduct";
-import StatusDropdown from '../../status/StatusDropdown';
+import StatusDropdown from '../../status/v4/StatusDropdown';
 import { getProducts } from '../../../redux/features/product/productSlice';
+import { getSuppliers } from '../../../redux/features/supplier/supplierSlice';
+import { getStores } from '../../../redux/features/store/storeSlice';
 import './TransactionForm.scss'; // Import SCSS file
 
 const TransactionForm = ({
-  handleInputChange,
-  saveTransaction,
+  handleSaveTransaction
 }) => {
   const dispatch = useDispatch();
 
-  const { products, isLoading, isError, message } = useSelector(
+  const { products, isError: productIsError, message: productMessage  } = useSelector(
     (state) => state.product
   );
 
   useEffect(() => {
     dispatch(getProducts());
 
-    if (isError) {
-      console.log(message);
+    if (productIsError) {
+      console.log(productMessage);
     }
-  }, [isError, message, dispatch]);
+  }, [productIsError, productMessage, dispatch]);
 
+  const { suppliers, isError: supplierIsError, message: supplierMessage  } = useSelector(
+    (state) => state.supplier
+  );
 
-  const [suppliers, setSuppliers] = useState(["Supplier 1","Supplier 2"]);
-  const [stores, setStores] = useState(["Store 1","Store 2"]);
+  useEffect(() => {
+    dispatch(getSuppliers());
+
+    if (supplierIsError) {
+      console.log(supplierMessage);
+    }
+  }, [supplierIsError, supplierMessage , dispatch]);
+
+  const { stores, isError: storeIsError, message: storeMessage  } = useSelector(
+    (state) => state.store
+  );
+
+  useEffect(() => {
+    dispatch(getStores());
+
+    if (storeIsError) {
+      console.log(storeMessage);
+    }
+  }, [storeIsError, storeMessage , dispatch]);
 
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [selectedSupplier, setSelectedSupplier] = useState('');
   const [selectedStore, setSelectedStore] = useState('');
   const [selectedStaff, setSelectedStaff] = useState('');
-  const [selectedProduct, setSelectedProduct] = useState('');
   const [status, setStatus] = useState(1);
-  const [quantity, setQuantity] = useState(1);
   const [totalPrice, setTotalPrice] = useState(0);
-
-  useEffect(() => {
-    // Fetch data from the database for suppliers, stores, and products
-    // You might need to use an API call to your backend
-    // Example:
-    // fetch('/api/suppliers').then(res => res.json()).then(data => setSuppliers(data));
-    // fetch('/api/stores').then(res => res.json()).then(data => setStores(data));
-    // fetch('/api/products').then(res => res.json()).then(data => setProducts(data));
-  }, []);
 
   useEffect(() => {
     let total = 0;
     for(var i of selectedProducts){
       total += parseInt(i.price) * parseInt(i.quantity);
     }
-    console.log(total)
     setTotalPrice(total);
   }, [selectedProducts]);
 
   const handleAddProduct = (productId, quantity) => {    
     const existingProductIndex = selectedProducts.findIndex((product) => product._id === productId);
-    console.log(existingProductIndex);
+    // console.log(existingProductIndex);
     if (existingProductIndex !== -1) {
       // If the product already exists, update its quantity
       const updatedProducts = [...selectedProducts];
@@ -103,32 +112,61 @@ const TransactionForm = ({
     // additional logic if needed
   };
 
+  const saveTransaction = async (e) => {
+    e.preventDefault();
+    console.log("Save Transaction");
+    const details = [];
+    selectedProducts.forEach((value, index) => {
+      const detail = {
+        product_id: selectedProducts[index].product_id,
+        quantity: selectedProducts[index].quantity,
+        price: selectedProducts[index].price,
+      }
+      details.push(detail);
+    })
+    const formData = {
+      supplier: selectedSupplier,
+      store: selectedStore,
+      staff: selectedStaff,
+      status,
+      details,
+      total: totalPrice
+    };
+    console.log(formData);
+    
+    handleSaveTransaction(formData)
+  };
+
   return (
     <div className='transaction-form'>
       <Card cardClass={"card"}>
-        <form onSubmit={saveTransaction}>
-          <Supplier 
-            suppliers={suppliers}
-            selectedSupplier={selectedSupplier}
-            handleSupplierChange={handleSupplierChange}
-          />
-          <Store stores={stores} selectedStore={selectedStore} handleStoreChange={handleStoreChange} />
-          <Staff handleStaffChange={handleStaffChange} />
-          <div className='--flex-between --flex-dir-column'>
-            <label>Status:</label>
-            <StatusDropdown handleStatusChange={handleStatusChange} />
-          </div>
-          
-          <AddProduct products={products} handleAddProduct={handleAddProduct} />
-          
-        </form>
+        <Supplier 
+          suppliers={suppliers}
+          selectedSupplier={selectedSupplier}
+          handleSupplierChange={handleSupplierChange}
+        />
+        <Store stores={stores} 
+        selectedStore={selectedStore} 
+        handleStoreChange={handleStoreChange}
+        />
+        <Staff handleStaffChange={handleStaffChange} />
+        <div className='--flex-between --flex-dir-column'>
+          <label>Status:</label>
+          <StatusDropdown handleStatusChange={handleStatusChange} />
+        </div>
+        
+        <AddProduct 
+        products={products} 
+        handleAddProduct={handleAddProduct} 
+        />
+        
       </Card>
       <Card cardClass={"card"}>
         <SelectedProducts products={selectedProducts} handleRemoveProduct={handleRemoveProduct}/>
         <div>
           <label className='total-price'>Total Price: ${totalPrice}</label>
         </div>
-        <button>Save Transaction</button>
+        <button onClick={saveTransaction}>Save Transaction</button>
       </Card>
     </div>
   );

@@ -6,7 +6,7 @@ const createTransaction = asyncHandler(async (req, res) => {
   try {
     const {status, total, supplier, staff_id, detail} = req.body;
 
-    if (!status || !total || !supplier || !staff_id || !detail) {
+    if (!status || !total || !supplier || !staff || !detail) {
       res.status(400);
       throw new Error("Please fill in all fields");
     }

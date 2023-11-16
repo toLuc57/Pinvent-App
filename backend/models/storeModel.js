@@ -42,35 +42,6 @@ const storeSchema = new mongoose.Schema(
   }
 );
 
-const storeCounterSchema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
-        ref: "User",
-    },
-    sequence_value: {
-        type: Number,
-        default: 1
-    }
-});
-
-const StoreCounter = mongoose.model('StoreCounter', storeCounterSchema);
 const Store = mongoose.model('Store', storeSchema);
 
-storeSchema.pre('save', async function(next) {
-  if (!this.store_id) {
-      const counter = await StoreCounter.findOneAndUpdate(
-          { user_id: this.user },
-          { $inc: { sequence_value: 1 } },
-          { new: true, upsert: true }
-      );
-      this.store_id = counter.sequence_value;
-  }
-  next();
-});
-
-module.exports = {
-    Store,
-    StoreCounter,
-};
+module.exports = Store;

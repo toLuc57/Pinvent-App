@@ -156,9 +156,9 @@ const {
 } = require('../controllers/supplierController');
 
 router.post("/", protect, createSupplier);
-router.get('/suppliers', protect, getSuppliers);
-router.get('/suppliers/:id', protect, getSupplierById);
-router.patch('/suppliers/:id', protect, updateSupplier);
+router.get('/', protect, getSuppliers);
+router.get('/:id', protect, getSupplierById);
+router.patch('/:id', protect, updateSupplier);
 router.delete("/:id", protect, deleteSupplier);
 
 module.exports = router;

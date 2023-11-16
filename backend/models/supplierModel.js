@@ -42,35 +42,6 @@ const supplierSchema = new mongoose.Schema(
   }
 );
 
-const supplierCounterSchema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
-        ref: "User",
-    },
-    sequence_value: {
-        type: Number,
-        default: 1
-    }
-});
-
-const SupplierCounter = mongoose.model('SupplierCounter', supplierCounterSchema);
 const Supplier = mongoose.model('Supplier', supplierSchema);
 
-supplierSchema.pre('save', async function(next) {
-  if (!this.supplier_id) {
-      const counter = await SupplierCounter.findOneAndUpdate(
-          { user_id: this.user },
-          { $inc: { sequence_value: 1 } },
-          { new: true, upsert: true }
-      );
-      this.supplier_id = counter.sequence_value;
-  }
-  next();
-});
-
-module.exports = {
-    Supplier,
-    SupplierCounter
-};
+module.exports = Supplier;

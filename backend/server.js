@@ -50,9 +50,9 @@ app.post("/api/upload/products", uploadProduct.single("file"), function (req, re
 app.use("/api/users", userRoute);
 app.use("/api/products", productRoute);
 app.use("/api/transactions", transactionRoute);
-app.use("/api/staff", staffRoute);
+app.use("/api/staffs", staffRoute);
 app.use("/api/stores", storeRoute);
-app.use("/api/supplier", supplierRoute);
+app.use("/api/suppliers", supplierRoute);
 app.use("/api/huis", highlyUtilityiIemsetsRoute);
 app.use("/api/contactus", contactRoute);
 

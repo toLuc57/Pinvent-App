@@ -12,15 +12,16 @@ const createStaff = asyncHandler(async (req, res) => {
     }
   
     // Create Staff
-    const product = await Staff.create({
+    const staff = await Staff.create({
       user: req.user.id,
       name,
       email,
       phone,
       status,
     });
+    console.log(staff)
   
-    res.status(201).json(product);
+    res.status(201).json(staff);
   });
 
 // Get Staff

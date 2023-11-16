@@ -158,9 +158,9 @@ const {
 } = require('../controllers/staffController');
 
 router.post("/", protect, createStaff);
-router.get('/staffs', protect, getStaffs);
-router.get('/staffs/:id', protect, getStaffById);
-router.patch('/staffs/:id', protect, updateStaff);
+router.get('/', protect, getStaffs);
+router.get('/:id', protect, getStaffById);
+router.patch('/:id', protect, updateStaff);
 router.delete("/:id", protect, deleteStaff);
 
 module.exports = router;

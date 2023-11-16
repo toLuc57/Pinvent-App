@@ -41,35 +41,7 @@ const staffSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-const staffCounterSchema = new mongoose.Schema({
-    user_id: {
-        type: mongoose.Schema.Types.ObjectId,
-        unique: true,
-        required: true,
-        ref: "User",
-    },
-    sequence_value: {
-        type: Number,
-        default: 1
-    }
-});
 
-const StaffCounter = mongoose.model('StaffCounter', staffCounterSchema);
 const Staff = mongoose.model('Staff', staffSchema);
 
-staffSchema.pre('save', async function(next) {
-  if (!this.staff_id) {
-      const counter = await StaffCounter.findOneAndUpdate(
-          { user_id: this.user },
-          { $inc: { sequence_value: 1 } },
-          { new: true, upsert: true }
-      );
-      this.staff_id = counter.sequence_value;
-  }
-  next();
-});
-
-module.exports = {
-    Staff,
-    StaffCounter
-};
+module.exports = Staff;

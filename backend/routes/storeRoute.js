@@ -159,9 +159,9 @@ const {
 } = require('../controllers/storeController');
 
 router.post("/", protect, createStore);
-router.get('/stores', protect, getStores);
-router.get('/stores/:id', protect, getStoreById);
-router.patch('/stores/:id', protect, updateStore);
+router.get('/', protect, getStores);
+router.get('/:id', protect, getStoreById);
+router.patch('/:id', protect, updateStore);
 router.delete("/:id", protect, deleteStore);
 
 module.exports = router;

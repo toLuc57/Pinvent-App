@@ -23,7 +23,7 @@ const getHighlyUtilityItemsets = asyncHandler(async (req, res) => {
       const productPromises = arrayResult.map(async (item) => {
         const tempProductsData = [];
         for (const itemId of item.itemset) {
-          const product = await Product.find({ product_id: itemId });
+          const product = await Product.findOne({ product_id: itemId });
           tempProductsData.push(product);
         }
   

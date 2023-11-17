@@ -108,7 +108,7 @@ Instructions for installing and running the project locally.
 git clone https://github.com/toLuc57/Pinvent-App
 
 # Navigate to the project directory
-cd your-project
+cd pinvent-app
 
 # Run Docker Compose to start all services
 docker-compose up
@@ -203,25 +203,7 @@ Hướng dẫn cài đặt và chạy dự án trên máy cục bộ.
 git clone https://github.com/toLuc57/Pinvent-App
 
 # Di chuyển vào thư mục dự án
-cd your-project
-
-# Chạy Docker Compose để khởi chạy tất cả các dịch vụ
-docker-compose up
-```
-# Tên Dự Án
-
-Mô tả ngắn về dự án của tôi.
-
-## Cài Đặt
-
-Hướng dẫn cài đặt và chạy dự án trên máy cục bộ.
-
-```bash
-# Clone repository từ GitHub
-git clone https://github.com/your-username/your-project.git
-
-# Di chuyển vào thư mục dự án
-cd your-project
+cd pinvent-app
 
 # Chạy Docker Compose để khởi chạy tất cả các dịch vụ
 docker-compose up

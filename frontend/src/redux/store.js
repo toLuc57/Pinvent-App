@@ -19,7 +19,6 @@ export const store = configureStore({
     staff: staffReducer,
     store: storeReducer,
     supplier: supplierReducer,
-
     filterProduct: filterProductSlice,
     filterTransaction: filterTransactionSlice,
     filterStaff: filterStaffSlice,

@@ -10,11 +10,13 @@ const filterSupplierSlice = createSlice({
   reducers: {
     FILTER_SUPPLIERS(state, action) {
       const { suppliers, search } = action.payload;
-      const tempSuppliers = suppliers.filter(
-        (supplier) =>
-        supplier.name.toLowerCase().includes(search.toLowerCase()) ||
-        supplier.email.toLowerCase().includes(search.toLowerCase())
-      );
+      const tempSuppliers = suppliers.filter((supplier) => {
+        const lowercasedSearch = search.toLowerCase();
+        const isNameMatched = supplier.name && supplier.name.toLowerCase().includes(lowercasedSearch);
+        const isEmailMatched = supplier.email && supplier.email.toLowerCase().includes(lowercasedSearch);
+
+        return isNameMatched || isEmailMatched;
+      });
 
       state.filteredSuppliers = tempSuppliers;
     },

@@ -10,6 +10,14 @@ const createStaff = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Please fill in all fields");
     }
+
+    // Check if staff email already exists
+    const staffExists = await Staff.findOne({ email });
+
+    if (staffExists) {
+      res.status(400);
+      throw new Error("Email has already been registered");
+    }
   
     // Create Staff
     const staff = await Staff.create({

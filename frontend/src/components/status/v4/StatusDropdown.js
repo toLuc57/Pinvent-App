@@ -15,8 +15,8 @@ const StatusDropdown = ({
   return (
     <div className='status-dropdown'>
       <select onChange={handleStatusChange} 
-      id="status" name='status'
-      defaultValue={statusCode ?? "--Select status--"}>
+      id="status" name='status'      
+      value={statusCode}>
         {statusOptions.map((option) => (
           <option key={option.value} value={option.value} style={{ color: option.color }}>
             {option.label}

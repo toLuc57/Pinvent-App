@@ -14,18 +14,21 @@ const TransactionSchema = new mongoose.Schema(
     },
     total: Number,
     supplier: {
-      type: String,
-      default: "1",
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Supplier",
     },
-    store_id: {
-      type: String,
-      default: "1",
+    store: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Store",
     },
-    staff_id: {
-      type: String,
-      default: "1",
+    staff: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Staffs",
     },
-    detail: [
+    details: [
       {
         product_id: Number,
         quantity: Number,

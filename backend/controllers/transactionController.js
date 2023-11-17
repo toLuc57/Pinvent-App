@@ -1,28 +1,34 @@
 const asyncHandler = require("express-async-handler");
 const Transaction = require('../models/transactionModel');
 const Product = require('../models/productModel');
+const Supplier = require('../models/supplierModel');
+const Staff = require('../models/staffModel');
+const Store = require('../models/storeModel');
 
 const createTransaction = asyncHandler(async (req, res) => {
   try {
-    const {status, total, supplier, staff_id, detail} = req.body;
+    const {status, total, supplier, staff, details, store} = req.body;
 
-    if (!status || !total || !supplier || !staff || !detail) {
+    console.log(req.body)
+
+    if (!status || !total || !supplier || !staff || !details) {
       res.status(400);
       throw new Error("Please fill in all fields");
     }
 
     const newTransaction = await Transaction.create({
       user: req.user.id,
-      status,
-      total,
       supplier,
-      staff_id,
-      detail
+      store,
+      staff,
+      status,
+      details,
+      total
     });
     
     return res.status(201).json(newTransaction);
   } catch (error) {
-    res.status(404).json('Cannot create new Transaction');
+    res.status(404).json({message: error.message});
   }
 });
 
@@ -54,7 +60,7 @@ const getTransaction = asyncHandler(async (req, res) => {
     }
   
     // Sử dụng Promise.all để chờ tất cả các promises hoàn thành
-    const transformedDetail = await Promise.all(transaction.detail.map(async (item) => {
+    const transformedDetail = await Promise.all(transaction.details.map(async (item) => {
       const product = await Product.findOne({ product_id: item.product_id });
       return {
         product,
@@ -63,8 +69,37 @@ const getTransaction = asyncHandler(async (req, res) => {
       };
     }));
 
+    const transformedSupplier = await (async () => {
+      const supplier = await Supplier.findById(transaction.supplier);
+      return {
+        supplier
+      };
+    })();
+    
+    const transformedStaff = await (async () => {
+      const staff = await Staff.findById(transaction.staff);
+      return {
+        staff
+      };
+    })();
+    
+    const transformedStore = await (async () => {
+      const store = await Store.findById(transaction.store);
+      return {
+        store
+      };
+    })();
+    
     const result = { ...transaction._doc };
-    result.detail = transformedDetail;
+    result.details = transformedDetail.map((detail) => ({
+      ...detail.product._doc,
+      quantity: detail.quantity,
+      price: detail.price,
+    }));
+    
+    result.supplier = transformedSupplier.supplier;
+    result.staff = transformedStaff.staff;
+    result.store = transformedStore.store;
 
     res.status(200).json(result);
   } catch (error) {

@@ -9,6 +9,14 @@ const createSupplier = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Please fill in all fields");
     }
+
+    // Check if supplier email already exists
+    const supplierExists = await Supplier.findOne({ email });
+
+    if (supplierExists) {
+      res.status(400);
+      throw new Error("Email has already been registered");
+    }
   
     // Create Supplier
     const product = await Supplier.create({

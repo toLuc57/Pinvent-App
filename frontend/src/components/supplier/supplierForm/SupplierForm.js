@@ -24,6 +24,7 @@ const SupplierForm = ({
             name="name"
             value={supplier?.name}
             onChange={handleInputChange}
+            required
           />
 
           <label htmlFor="phone">Supplier Phone:</label>
@@ -46,6 +47,7 @@ const SupplierForm = ({
                 name="email"
                 value={supplier?.email}
                 onChange={handleInputChange}
+                required
               />
             </>
           ) : (

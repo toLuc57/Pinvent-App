@@ -15,44 +15,50 @@ const StoreForm = ({
       <Card cardClass={"card"}>
         <form onSubmit={saveStore}>
           
-          <label>Store Name:</label>
+          <label htmlFor="name">Store Name:</label>
           <input
             type="text"
             placeholder="Store name"
             name="name"
+            id="name"
             value={store?.name}
             onChange={handleInputChange}
+            required
           />
 
-          <label>Store Phone:</label>
+          <label htmlFor="phone">Store Phone:</label>
           <input
             type="text"
             placeholder="Store Phone"
             name="phone"
+            id="phone"
             value={store?.phone}
             onChange={handleInputChange}
           />
 
-          <label>Store Location:</label>
+          <label htmlFor="location">Store Location:</label>
           <input
             type="text"
             placeholder="Store Location"
             name="location"
+            id="location"
             value={store?.location}
             onChange={handleInputChange}
+            required
           />
 
-          <label>Store State:</label>
+          <label htmlFor="state">Store State:</label>
           <input
             type="text"
             placeholder="Store State"
             name="state"
+            id="state"
             value={store?.state}
             onChange={handleInputChange}
           />
 
           <label>Store Status:</label>
-          <StatusDropdown handleStatusChange={handleInputChange}/>
+          <StatusDropdown statusCode={store?.status} handleStatusChange={handleInputChange}/>
 
           <div className="--my">
             <button type="submit" className="--btn --btn-primary">

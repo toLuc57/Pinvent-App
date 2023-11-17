@@ -10,10 +10,13 @@ const filterStaffSlice = createSlice({
   reducers: {
     FILTER_STAFFS(state, action) {
       const { staffs, search } = action.payload;
-      const tempStaffs = staffs.filter(
-        (staff) =>
-        staff.name.toLowerCase().includes(search.toLowerCase()) ||
-        staff.email.toLowerCase().includes(search.toLowerCase()) 
+      const tempStaffs = staffs.filter((staff) => {
+        const lowercasedSearch = search.toLowerCase();
+        const isNameMatched = staff.name && staff.name.toLowerCase().includes(lowercasedSearch);
+        const isEmailMatched = staff.email && staff.email.toLowerCase().includes(lowercasedSearch);
+
+        return isNameMatched || isEmailMatched;
+        } 
       );
 
       state.filteredStaffs = tempStaffs;

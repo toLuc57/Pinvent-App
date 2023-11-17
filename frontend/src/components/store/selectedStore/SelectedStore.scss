@@ -1,13 +1,23 @@
 .store {  
     label {
       display: block;
-      margin-bottom: 5px;
+      margin: 5px 0px;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--color-dark);
     }
   
     select {
       width: 100%;
       padding: 8px;
       font-size: 16px;
+    }
+
+    .error {
+      color: red;
+      font-size: 1.4rem;
+      font-weight: 500;
+      padding: 8px;
     }
   }
   

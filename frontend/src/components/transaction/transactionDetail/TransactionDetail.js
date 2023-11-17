@@ -13,6 +13,14 @@ const TransactionDetail = () => {
   useRedirectLoggedOutUser("/login");
   const dispatch = useDispatch();
 
+  const shortenText = (text, n) => {
+    if (text.length > n) {
+      const shortenedText = text.substring(0, n).concat("...");
+      return shortenedText;
+    }
+    return text;
+  };
+
   const { id } = useParams();
 
   const isLoggedIn = useSelector(selectIsLoggedIn);
@@ -40,13 +48,13 @@ const TransactionDetail = () => {
             <h4>Transaction Availability: <Status statusCode={transaction.status}></Status> </h4>
             <hr />
             <p>
-              <b>&rarr; Supplier : </b> {transaction.supplier}
+              <b>&rarr; Supplier : </b> {transaction.supplier && `${transaction.supplier.name} - ${transaction.supplier.email}`}
             </p>
             <p>
-              <b>&rarr; Store : </b> {transaction.store_id}
+              <b>&rarr; Store : </b> {transaction.store && `${transaction.store.name} - ${transaction.store.location}`}
             </p>
             <p>
-              <b>&rarr; Staff : </b> {transaction.staff_id}
+              <b>&rarr; Staff : </b> {transaction.staff && `${transaction.staff.name} - ${transaction.staff.email}`}
             </p>
             <p>
               <b>&rarr; Products: </b>
@@ -61,7 +69,7 @@ const TransactionDetail = () => {
                 </thead>
                 <tbody>
                 {transaction.details.map((products, index) => {
-                  const { _id, name } = products.details;
+                  const { _id, name } = products;
                   return (
                     <tr key={_id}>
                       <td>{index + 1}</td>

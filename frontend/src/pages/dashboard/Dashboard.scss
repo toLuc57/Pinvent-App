@@ -1,0 +1,37 @@
+.dashboard {
+  font-size: 1.4rem;
+  margin: 0 auto;
+  color: black;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+  .formInput{
+    display: flex;
+    gap: 5px;
+    margin-right: 2%;
+    flex-direction: row;
+    justify-self: flex-start;
+
+    label {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;      
+    }
+    input {
+      display: inline-block;
+      padding: 0.5rem;
+    }
+    button {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+  }
+}

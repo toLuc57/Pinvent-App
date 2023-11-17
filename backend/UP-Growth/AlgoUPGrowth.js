@@ -205,7 +205,7 @@ class AlgoUPGrowth {
         try {
             for(let i = 0; i < data.length; i++) {
                 const transaction = data[i];
-                const thisProducts = transaction["detail"];
+                const thisProducts = transaction["details"];
                 const transactionUtility = parseInt(transaction.total);
     
                 for (let j = 0; j < thisProducts.length; j++) {
@@ -227,7 +227,7 @@ class AlgoUPGrowth {
             let tree = new UPTree();
             for (let i = 0; i < data.length; i++) {
                 const transaction = data[i];
-                const thisProducts = transaction["detail"];
+                const thisProducts = transaction["details"];
 
                 let remainingUtility = 0;
                 const revisedTransaction = [];
@@ -280,7 +280,7 @@ class AlgoUPGrowth {
         try {
             for (let i = 0; i < data.length; i++) {
                 const transaction = data[i];
-                const thisProducts = transaction["detail"];
+                const thisProducts = transaction["details"];
 
                 const revisedTransaction = [];
     

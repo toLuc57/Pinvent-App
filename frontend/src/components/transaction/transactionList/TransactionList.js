@@ -21,7 +21,7 @@ import {
 } from "../../../redux/features/transaction/transactionSlice";
 
 const TransactionList = ({ transactions, isLoading }) => {
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const filteredTransactions = useSelector(selectFilteredTransactions);
 

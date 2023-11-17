@@ -5,7 +5,7 @@ const {AlgoUPGrowth} = require("../UP-Growth/AlgoUPGrowth");
 
 // Get Highly Utility Itemsets
 const getHighlyUtilityItemsets = asyncHandler(async (req, res) => {
-    const { minUtility } = req.body;
+  const { minUtility } = req.query;
   
     if (!minUtility) {
       res.status(404);
@@ -14,7 +14,7 @@ const getHighlyUtilityItemsets = asyncHandler(async (req, res) => {
   
     const successfulTransactions = await Transaction.find({ user: req.user.id, status: 3 }).sort("-createdAt");
     const algo = new AlgoUPGrowth();
-  
+
     const HUIs = algo.runAlgorithmDB(successfulTransactions, minUtility);
   
     try {

@@ -6,23 +6,8 @@ const API_URL = `${BACKEND_URL}/api/transactions/`;
 
 // Create New Transaction
 const createTransaction = async (formData) => {
-  const status = formData.get("status");
-  const total = formData.get("total");
-  const supplier = formData.get("supplier");
-  const store_id = formData.get("store");
-  const staff_id = formData.get("staff");
-  const detail = formData.get("detail");
 
-  const data = {
-    status,
-    total,
-    supplier,
-    store_id,
-    staff_id,
-    detail,
-  }
-
-  const response = await axios.post(API_URL, data);
+  const response = await axios.post(API_URL, formData);
   return response.data;
 };
 

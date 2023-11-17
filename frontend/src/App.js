@@ -16,6 +16,7 @@ import { getLoginStatus } from "./services/authService";
 import { SET_LOGIN } from "./redux/features/auth/authSlice";
 import AddTransaction from "./pages/transaction/AddTransaction";
 import Transaction from "./pages/transaction/Transaction";
+import TransactionDetail from "./components/transaction/transactionDetail/TransactionDetail";
 import AddStore from "./pages/store/AddStore";
 import Store from "./pages/store/Store";
 import EditStore from "./pages/store/EditStore";
@@ -128,7 +129,17 @@ function App() {
               </Layout>
             </Sidebar>
           }
-        />        
+        />
+        <Route
+          path="//transaction-detail/:id"
+          element={
+            <Sidebar>
+              <Layout>
+                <TransactionDetail />
+              </Layout>
+            </Sidebar>
+          }
+        />
         <Route
           path="/stores/"
           element={

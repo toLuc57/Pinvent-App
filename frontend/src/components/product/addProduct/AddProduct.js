@@ -22,18 +22,33 @@ const AddProduct = ({ products, handleAddProduct }) => {
 
   return (
     <div className='add-product-transaction'>
-      <label>Add Product:</label>
-      <select value={selectedProduct} onChange={handleProductChange}>
-        <option value="">Select a product</option>
-        {products.map((product) => (
-          <option key={product._id} value={product._id}>
-            {product.name}
-          </option>
-        ))}
-      </select>
-      <label>Quantity:</label>
-      <input type="number" value={quantity} onChange={handleQuantityChange} />
-      <span onClick={handleAddClick}>Add Product</span>
+      {products.length !== 0 ? (
+        <>
+          <label htmlFor='product'>Add Product:</label>
+          <select id='product' name='product' value={selectedProduct} onChange={handleProductChange}>
+            <option>--Select product--</option>
+            {products.map((product) => (
+              <option key={product._id} value={product._id}>
+                {product.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor='quantity'>Quantity:</label>
+          <input type="number" 
+          id='quantity' name='quantity' 
+          value={quantity} 
+          onChange={handleQuantityChange} 
+          min={1}
+          max={200}
+          />
+          <span onClick={handleAddClick}>Add Product</span>
+        </>
+      ) : (
+        <>
+          <p className='error'>-- No product found, please add a product...</p>
+          <hr/>
+        </>
+      )}
     </div>
   );
 };

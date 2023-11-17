@@ -1,21 +1,22 @@
 .staff {  
-    label {
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    input[type="text"] {
-      display: block;
-      font-size: 1.6rem;
-      font-weight: 300;
-      padding: 1rem;
-      margin: 1rem auto;
-      width: 100%;
-      border: 1px solid #777;
-      border-radius: 3px;
-      outline: none;
-    }
-  
-    /* Add your staff-related styles here */
+  label {
+    display: block;
+    margin: 5px 0px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--color-dark);
   }
-  
+
+  select {
+    width: 100%;
+    padding: 8px;
+    font-size: 16px;
+  }
+
+  .error {
+    color: red;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding: 8px;
+  }
+}

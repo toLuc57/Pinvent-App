@@ -23,6 +23,7 @@ const StaffForm = ({
             name="name"
             value={staff?.name}
             onChange={handleInputChange}
+            required
           />
 
           <label>Staff Phone:</label>
@@ -42,6 +43,7 @@ const StaffForm = ({
                 name="email"
                 value={staff?.email}
                 onChange={handleInputChange}
+                required
               />
             </>
           ) : (

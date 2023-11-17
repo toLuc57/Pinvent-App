@@ -1,34 +1,61 @@
 .transaction-form {
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
 
-  @media (max-width: 800px) {
-    flex-direction: column;
+  @media (min-width: 800px) {
+    > .card {
+      width: calc(3/7 * 90%); // Cột đầu chiếm 3/7 chiều rộng
+    }
+
+    > .card:last-child {
+      width: calc(4/7 * 90%); // Cột thứ hai chiếm 4/7 chiều rộng
+    }
   }
 
   .card {
-    flex: 1;
-    @media (max-width: 800px) {
-      width: 100%;
-    }
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #fff;
+    flex-grow: 1;
+    min-width: 0; // Fix for overflow issue with flexbox in some browsers
+  }
 
-    form {
+  // Thêm các quy tắc CSS khác cho các phần khác của giao diện của bạn ở đây
+
+  .status {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin: 5px 0px;
       font-size: 1.4rem;
       font-weight: 500;
       color: var(--color-dark);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      padding: 20px;
+    }
+  }
 
-      label {
-        margin-bottom: 5px;
-      }
-    }
-    .total-price {      
-      font-size: 18px;
-      font-weight: bold;
-      color: var(--color-dark);
-    }
+  .total-price {
+    display: block;
+    margin: 5px 0px;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--color-dark);
+    font-weight: 400;
+  }
+
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  button:disabled {
+    background-color: #dddddd;
+    color: #888888; 
   }
 }

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  # MongoDB service
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+  
+  # Express (NodeJS) service
+  server:
+    build:
+      context: ./server
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mongodb
+
+  # ReactJS (Client) service
+  client:
+    build:
+      context: ./client
+    ports:
+      - "80:80"
+    depends_on:
+      - server

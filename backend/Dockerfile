@@ -1,20 +1,31 @@
-# Sử dụng hình ảnh Node chính thức từ Docker Hub
-FROM node:14 as express
+# syntax=docker/dockerfile:1.4
 
-# Thiết lập thư mục làm việc trong container
+FROM node:lts-buster-slim AS development
+
+# Create app directory
 WORKDIR /usr/src/app
 
-# Sao chép package.json và package-lock.json vào thư mục làm việc
-COPY package*.json ./
+COPY package.json /usr/src/app/package.json
+COPY package-lock.json /usr/src/app/package-lock.json
+RUN npm ci
 
-# Cài đặt dependencies
-RUN npm install
+COPY . /usr/src/app
 
-# Sao chép toàn bộ nội dung của thư mục backend vào thư mục làm việc
-COPY . .
+EXPOSE 3000
 
-# Mở cổng mà backend sẽ lắng nghe
-EXPOSE 3001
+CMD [ "npm", "run", "dev" ]
 
-# Khởi chạy ứng dụng backend
-CMD ["npm", "start"]
+FROM development as dev-envs
+RUN <<EOF
+apt-get update
+apt-get install -y --no-install-recommends git
+EOF
+
+RUN <<EOF
+useradd -s /bin/bash -m vscode
+groupadd docker
+usermod -aG docker vscode
+EOF
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
+CMD [ "npm", "run", "dev" ]

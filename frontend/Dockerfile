@@ -1,20 +1,41 @@
-# Sử dụng hình ảnh Node chính thức từ Docker Hub
-FROM node:14 as react
+# syntax=docker/dockerfile:1.4
 
-# Thiết lập thư mục làm việc trong container
+# Create image based on the official Node image from dockerhub
+FROM node:lts-buster AS development
+
+# Create app directory
 WORKDIR /usr/src/app
 
-# Sao chép package.json và package-lock.json vào thư mục làm việc
-COPY package*.json ./
+# Copy dependency definitions
+COPY package.json /usr/src/app
+COPY package-lock.json /usr/src/app
 
-# Cài đặt dependencies
-RUN npm install
+# Install dependecies
+#RUN npm set progress=false \
+#    && npm config set depth 0 \
+#    && npm i install
+RUN npm ci
 
-# Sao chép toàn bộ nội dung của thư mục frontend vào thư mục làm việc
-COPY . .
+# Get all the code needed to run the app
+COPY . /usr/src/app
 
-# Mở cổng mà frontend sẽ chạy
-EXPOSE 83
+# Expose the port the app runs in
+EXPOSE 3000
 
-# Khởi chạy ứng dụng frontend
+# Serve the app
 CMD ["npm", "start"]
+
+FROM development as dev-envs
+RUN <<EOF
+apt-get update
+apt-get install -y --no-install-recommends git
+EOF
+
+RUN <<EOF
+useradd -s /bin/bash -m vscode
+groupadd docker
+usermod -aG docker vscode
+EOF
+# install Docker tools (cli, buildx, compose)
+COPY --from=gloursdocker/docker / /
+CMD [ "npm", "start" ]

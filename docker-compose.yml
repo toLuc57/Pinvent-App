@@ -1,25 +1,49 @@
-version: '3'
-services:
-  # MongoDB service
-  mongodb:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-  
-  # Express (NodeJS) service
-  server:
-    build:
-      context: ./server
-    ports:
-      - "3001:3001"
-    depends_on:
-      - mongodb
+version: '3.8'
 
-  # ReactJS (Client) service
+services:
+  # ReactJS Client Service
   client:
     build:
-      context: ./client
+      context: ./frontend
     ports:
-      - "80:80"
+      - "83:83"
     depends_on:
       - server
+    networks:
+      - node-network
+    volumes:
+      - ./frontend:/usr/src/app
+
+  # Express (NodeJS) Server and MongoDB Service
+  server:
+    build:
+      context: ./backend
+    image: node-app
+    ports:
+      - "3001:3001"
+    environment:
+      MONGO_URI: mongodb://mongo:27017/pinvent-app
+    depends_on:
+      - mongo
+    networks:
+      - node-network
+    volumes:
+      - ./backend:/usr/src/app
+
+  # MongoDB Service
+  mongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - "27017:27017"
+    networks:
+      - node-network
+    volumes:
+      - ./data:/data/db
+
+networks:
+  node-network:
+    driver: bridge

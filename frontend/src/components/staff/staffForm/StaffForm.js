@@ -9,7 +9,8 @@ const StaffForm = ({
   staff,
   handleInputChange,
   saveStaff,
-  isAdded
+  isAdded,
+  emailExists
 }) => {
   return (
     <div className="add-staff">
@@ -37,6 +38,11 @@ const StaffForm = ({
           {isAdded ? (
             <>
               <label>Staff Email</label>
+              {emailExists && (
+                <>
+                <p className="emailExists" id='emailExists'>Email already exists..</p>
+                </>
+              )}
               <input
                 type="text"
                 placeholder="Staff Email"

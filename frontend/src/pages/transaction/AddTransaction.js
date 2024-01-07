@@ -19,7 +19,7 @@ const AddTransaction = () => {
     console.log(formData);
     await dispatch(createTransaction(formData));
 
-    navigate("/dashboard");
+    navigate("/transactions");
   };
 
   return (

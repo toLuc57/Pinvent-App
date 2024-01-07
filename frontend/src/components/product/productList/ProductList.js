@@ -118,7 +118,7 @@ const ProductList = ({ products, isLoading }) => {
                   const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
-                      <td>{itemsPerPage*pageCount + index + 1}</td>
+                      <td>{itemsPerPage*(pageCount-1) + index + 1}</td>
                       <td>{shortenText(name, 16)}</td>
                       <td>{category}</td>
                       <td>
@@ -128,7 +128,7 @@ const ProductList = ({ products, isLoading }) => {
                       <td>{quantity}</td>
                       <td>
                         {"$"}
-                        {price * quantity}
+                        {Math.round(price * quantity * 100)/100}
                       </td>
                       <td className="icons">
                         <span>

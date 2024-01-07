@@ -206,7 +206,7 @@ class AlgoUPGrowth {
             for(let i = 0; i < data.length; i++) {
                 const transaction = data[i];
                 const thisProducts = transaction["details"];
-                const transactionUtility = parseInt(transaction.total);
+                const transactionUtility = parseFloat(transaction.total);
     
                 for (let j = 0; j < thisProducts.length; j++) {
                     const item = parseInt(thisProducts[j].product_id);
@@ -234,7 +234,7 @@ class AlgoUPGrowth {
     
                 for (let j = 0; j < thisProducts.length; j++) {
                     const itm = parseInt(thisProducts[j].product_id);
-                    const utility = parseInt(thisProducts[j].price);
+                    const utility = parseFloat(thisProducts[j].price);
                     
                     if (mapItemToTWU.get(itm) >= minUtility) {
                         revisedTransaction.push(new Item(itm, utility));
@@ -286,7 +286,7 @@ class AlgoUPGrowth {
     
                 for (let j = 0; j < thisProducts.length; j++) {
                     const item = parseInt(thisProducts[j].product_id);
-                    const utility = parseInt(thisProducts[j].price);
+                    const utility = parseFloat(thisProducts[j].price);
                     
                     if (mapItemToTWU.get(item) >= minUtility) {
                         revisedTransaction.push(new Item(item, utility));

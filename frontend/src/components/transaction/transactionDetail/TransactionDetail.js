@@ -77,7 +77,7 @@ const TransactionDetail = () => {
                       <td>{products.quantity}</td>
                       <td>
                         {"$"}
-                        {products.price}
+                        {Math.round(products.price *100)/100}
                       </td>
                     </tr>
                   );

@@ -60,7 +60,7 @@ const SelectedProducts = ({
                       <td>{quantity}</td>
                       <td>
                         {"$"}
-                        {price * quantity}
+                        {Math.round(price * quantity * 100)/100}
                       </td>
                       <td className="icons">
                         <span>

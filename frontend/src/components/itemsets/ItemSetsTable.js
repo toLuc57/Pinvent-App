@@ -35,7 +35,7 @@ const ItemSetsTable = ({ itemSets }) => {
         <tbody>
           {currentItems.map((itemSet, index) => (
             <tr key={index}>
-              <td>{itemsPerPage*pageCount + index + 1}</td>
+              <td>{itemsPerPage*(pageCount-1) + index + 1}</td>
               <td className='products'>
                 <ul>
                   {itemSet.products.map((product, i) => (

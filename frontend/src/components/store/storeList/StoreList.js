@@ -119,7 +119,7 @@ const StoreList = ({ stores, isLoading }) => {
                   const { _id, name, phone, location, state, status } = store;
                   return (
                     <tr key={_id}>
-                      <td>{index + 1}</td>
+                      <td>{itemsPerPage*(pageCount-1) + index + 1}</td>
                       <td>{name}</td>
                       <td>{phone}</td>
                       <td>

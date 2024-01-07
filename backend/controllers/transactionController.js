@@ -61,7 +61,7 @@ const getTransaction = asyncHandler(async (req, res) => {
   
     // Sử dụng Promise.all để chờ tất cả các promises hoàn thành
     const transformedDetail = await Promise.all(transaction.details.map(async (item) => {
-      const product = await Product.findOne({ product_id: item.product_id });
+      const product = await Product.findOne({ product_id: item.product_id, user: req.user.id });
       return {
         product,
         quantity: item.quantity,

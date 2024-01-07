@@ -110,7 +110,7 @@ const StaffList = ({ staffs, isLoading }) => {
                   const { _id, name, phone, email, status } = staff;
                   return (
                     <tr key={_id}>
-                      <td>{index + 1}</td>
+                      <td>{itemsPerPage*(pageCount-1) + index + 1}</td>
                       <td>{name}</td>
                       <td>{phone}</td>
                       <td>

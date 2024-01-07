@@ -34,7 +34,7 @@ const TransactionList = ({ transactions, isLoading }) => {
     console.log(...formData)
     await dispatch(updateTransaction({id, formData}));
     await dispatch(getTransactions());
-
+    setIsEditing(false)
   };
 
   const updateStatus = (code) => {
@@ -142,7 +142,7 @@ const TransactionList = ({ transactions, isLoading }) => {
                   const { _id, status, supplier, staff, store, total } = transaction;
                   return (
                     <tr key={_id}>
-                      <td>{index + 1}</td>
+                      <td>{itemsPerPage*(pageCount-1) + index + 1}</td>
                       <td><Status statusCode={status}/></td>
                       <td>{supplier}</td>
                       <td>{staff}</td>

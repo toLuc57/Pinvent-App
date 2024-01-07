@@ -69,7 +69,7 @@ const EditProduct = () => {
 
     await dispatch(updateProduct({ id, formData }));
     await dispatch(getProducts());
-    navigate("/dashboard");
+    navigate("/products");
   };
 
   return (

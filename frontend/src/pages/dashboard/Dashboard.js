@@ -7,7 +7,7 @@ import "./Dashboard.scss";
 
 const Dashboard = () => {
   const [itemSets, setItemSets] = useState([]);
-  const [minUtility, setMinUtility] = useState(30);
+  const [minUtility, setMinUtility] = useState(0);
   const [loading, setLoading] = useState(true);
 
   const handleSendRequest = async (e) => {

@@ -76,13 +76,13 @@ const TransactionForm = ({
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
   useEffect(() => {
-    let total = 0;
+    var total = 0;
     for(var i of selectedProducts){
-      total += parseInt(i.price) * parseInt(i.quantity);
+      total += Math.round(parseFloat(i.price) * parseInt(i.quantity) * 100) / 100;
     }
     setTotalPrice(total);
     // Disable submit button when no attribute is present
-    console.log("Disable submit button when no attribute is present")
+    console.log(selectedProducts);
     if(selectedProducts.length === 0 || staffs.length === 0 
       || suppliers.length === 0 || stores.length === 0){
         setIsButtonDisabled(true);
@@ -144,7 +144,7 @@ const TransactionForm = ({
       const detail = {
         product_id: selectedProducts[index].product_id,
         quantity: selectedProducts[index].quantity,
-        price: selectedProducts[index].price,
+        price: selectedProducts[index].price * selectedProducts[index].quantity,
       }
       details.push(detail);
     })

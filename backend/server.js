@@ -66,7 +66,10 @@ app.use(errorHandler);
 // Connect to DB and start server
 const PORT = process.env.PORT || 5000;
 mongoose
-  .connect( process.env.MONGO_URI || 'mongodb://127.0.0.1/Pinvent-app')
+  .connect( 
+    process.env.MONGO_URI 
+  // 'mongodb://127.0.0.1/Pinvent-app'
+  )
   .then(() => {
     app.listen(PORT, () => {
       console.log(`Server Running on port ${PORT}`);

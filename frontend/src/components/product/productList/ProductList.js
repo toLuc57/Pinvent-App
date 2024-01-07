@@ -118,7 +118,7 @@ const ProductList = ({ products, isLoading }) => {
                   const { _id, name, category, price, quantity } = product;
                   return (
                     <tr key={_id}>
-                      <td>{index + 1}</td>
+                      <td>{itemsPerPage*pageCount + index + 1}</td>
                       <td>{shortenText(name, 16)}</td>
                       <td>{category}</td>
                       <td>

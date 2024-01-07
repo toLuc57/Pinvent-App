@@ -58,7 +58,7 @@ Dưới đây là một ví dụ cấu trúc thư mục mẫu và nội dung cho
 
 3. Check Network Ports:
 
-    Ensure that the network ports used in the Docker Compose file (e.g., 80, 3001, 27017) do not conflict with other services on your machine.
+    Ensure that the network ports used in the Docker Compose file (e.g., 3000, 5000, 27017) do not conflict with other services on your machine.
 
 4. Path to the UP-Growth Algorithm:
 
@@ -108,7 +108,7 @@ Instructions for installing and running the project locally.
 git clone https://github.com/toLuc57/Pinvent-App
 
 # Navigate to the project directory
-cd pinvent-app
+cd Pinvent-App
 
 # Run Docker Compose to start all services
 docker-compose up
@@ -127,11 +127,11 @@ docker-compose up -d
 ```
 
 ## Client (ReactJS)
-Access the ReactJS application at http://localhost
+Access the ReactJS application at http://localhost:3000
 ...
 
 ## Server (Express and MongoDB)
-Access the Express server at http://localhost:3001
+Access the Express server at http://localhost:5000
 ...
 
 ## References
@@ -154,7 +154,7 @@ Reference to the UP-Growth algorithm by Philippe Fournier-Viger: [PDF](https://w
 
 3. Kiểm Tra Cổng Mạng:
 
-    Chắc chắn rằng các cổng mạng sử dụng trong Docker Compose file (ví dụ: 80, 3001, 27017) không bị xung đột với các dịch vụ khác trên máy của bạn.
+    Chắc chắn rằng các cổng mạng sử dụng trong Docker Compose file (ví dụ: 3000, 5000, 27017) không bị xung đột với các dịch vụ khác trên máy của bạn.
 
 4. Đường Dẫn Đến Thuật Toán UP-Growth:
 

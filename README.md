@@ -132,19 +132,18 @@ Describe how to use my project and how to check if the services are running. Typ
 
 ```bash
 # Build and run the services
-docker-compose up
+$ docker-compose up
 
 # Or to run it in daemon mode (background)
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 ## Client (ReactJS)
 Access the ReactJS application at http://localhost:3000
-...
 
 ## Server (Express and MongoDB)
 Access the Express server at http://localhost:5000
-...
+
 
 ## References
 Reference to the UP-Growth algorithm by Philippe Fournier-Viger: [PDF](https://www.philippe-fournier-viger.com/spmf/up-growth.pdf)
@@ -247,13 +246,12 @@ $ docker-compose up -d
 
 ### Client (ReactJS)
 
-Truy cập ứng dụng ReactJS tại http://localhost
-...
+Truy cập ứng dụng ReactJS tại http://localhost:3000
 
 ### Server (Express và MongoDB)
 
-Truy cập server Express tại http://localhost:3001
-...
+Truy cập server Express tại http://localhost:5000
+
 
 ## Tham Khảo
 

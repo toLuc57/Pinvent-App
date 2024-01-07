@@ -105,13 +105,25 @@ Instructions for installing and running the project locally.
 
 ```bash
 # Clone the repository from GitHub
-git clone https://github.com/toLuc57/Pinvent-App
+$ git clone https://github.com/toLuc57/Pinvent-App
 
 # Navigate to the project directory
-cd Pinvent-App
+$ cd Pinvent-App
+
+# Create the .env file
+$ touch .env
+# Open the .env file with a text editor and add the environment variables:
+$ cat .env
+MONGO_URI=<your_value>
+JWT_SECRET=<your_value>
+EMAIL_HOST=<your_value>
+EMAIL_USER=<your_value>
+EMAIL_PASS=<your_value>
+FRONTEND_URL=http://localhost:3000
+REACT_APP_BACKEND_URL=http://localhost:5000
 
 # Run Docker Compose to start all services
-docker-compose up
+$ docker-compose up
 ```
 
 # Usage
@@ -200,13 +212,25 @@ Hướng dẫn cài đặt và chạy dự án trên máy cục bộ.
 
 ```bash
 # Clone repository từ GitHub
-git clone https://github.com/toLuc57/Pinvent-App
+$ git clone https://github.com/toLuc57/Pinvent-App
 
 # Di chuyển vào thư mục dự án
-cd pinvent-app
+$ cd Pinvent-App
+
+# Tạo tệp `.env`
+$ touch .env
+
+$ cat .env
+MONGO_URI=<giá_trị_của_bạn>
+JWT_SECRET=<giá_trị_của_bạn>
+EMAIL_HOST=<giá_trị_của_bạn>
+EMAIL_USER=<giá_trị_của_bạn>
+EMAIL_PASS=<giá_trị_của_bạn>
+FRONTEND_URL=http://localhost:3000
+REACT_APP_BACKEND_URL=http://localhost:5000
 
 # Chạy Docker Compose để khởi chạy tất cả các dịch vụ
-docker-compose up
+$ docker-compose up
 ```
 
 ## Sử Dụng
@@ -215,10 +239,10 @@ Mô tả cách sử dụng dự án của tôi và cách kiểm tra các dịch 
 
 ```bash
 # Xây dựng và chạy các dịch vụ
-docker-compose up
+$ docker-compose up
 
 # Hoặc để chạy nó ở chế độ daemon (nền)
-docker-compose up -d
+$ docker-compose up -d
 ```
 
 ### Client (ReactJS)
